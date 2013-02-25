@@ -21,12 +21,14 @@ namespace ZuneClientApp
         {
             var client = new ZuneClient();
 
-            var results = await client.SearchAsync("Dark Knight", includeArtists:false, includeTracks: false);
+            //var results = await client.SearchAsync("Dark Knight", includeArtists: false, includeTracks: false);
+            var results = await client.GetAlbumsForArtistAsync("790f0000-0200-11db-89ca-0019b92a3933");
 
             var s = new StringBuilder();
             foreach (var result in results)
             {
-                s.AppendLine(string.Format("{0} - {1}", result.Title.Value, result.Type));
+                //s.AppendLine(string.Format("{0} - {1}", result.Name, result.Type));
+                s.AppendLine(result.Name);
             }
 
             MessageBox.Show(s.ToString());

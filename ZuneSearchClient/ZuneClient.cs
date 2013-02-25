@@ -24,7 +24,7 @@ namespace ZuneSearchClient
             HttpClient = new HttpClient(new CompressedHttpClientHandler());
         }
 
-        public async Task<List<Result>> SearchAsync(string searchQuery, bool includeAlbums = true, bool includeArtists = true, bool includeTracks = true, bool includePodcasts = true)
+        public async Task<List<SearchResult>> SearchAsync(string searchQuery, bool includeAlbums = true, bool includeArtists = true, bool includeTracks = true, bool includePodcasts = true)
         {
             if (string.IsNullOrEmpty(searchQuery))
             {
@@ -41,25 +41,45 @@ namespace ZuneSearchClient
 
             var xml = await HttpClient.GetStringAsync(url);
 
-            var result = ParseXml<SearchResults>(xml);
+            var results = ParseXml<ZuneSearchResults>(xml);
 
-            return result.Entries.ToList();
+            var resultList = results.Entries.Select(r => r.Result).ToList();
+
+            return resultList;
         }
 
-        public async Task<Artist> GetArtistInfoAsync(string artistId)
+        public async Task<ZuneArtist> GetArtistInfoAsync(string artistId)
         {
             if (string.IsNullOrEmpty(artistId))
             {
                 throw new NullReferenceException("Artist Id cannot be null or empty");
             }
 
-            var url = string.Format(Constants.ArtistUrlFormat, artistId);
+            var url = string.Format(Constants.ArtistUrlFormat, artistId, "biography");
 
             var xml = await HttpClient.GetStringAsync(url);
 
-            var result = ParseXml<Artist>(xml);
+            var result = ParseXml<ZuneArtist>(xml);
 
             return result;
+        }
+
+        public async Task<List<Album>> GetAlbumsForArtistAsync(string artistId)
+        {
+            if (string.IsNullOrEmpty(artistId))
+            {
+                throw new NullReferenceException("Artist Id cannot be null or empty");
+            }
+
+            var url = string.Format(Constants.ArtistUrlFormat, artistId, "albums");
+
+            var xml = await HttpClient.GetStringAsync(url);
+
+            var result = ParseXml<ZuneAlbumResults>(xml);
+
+            var returnList = result.Entries.Select(r => r.Result).ToList();
+
+            return returnList;
         }
 
         public async Task<Album> GetAlbumInfoAsync(string albumId)
@@ -73,9 +93,9 @@ namespace ZuneSearchClient
 
             var xml = await HttpClient.GetStringAsync(url);
 
-            var result = ParseXml<Album>(xml);
+            var result = ParseXml<ZuneAlbum>(xml);
 
-            return result;
+            return result.Result;
         }
 
         private static T ParseXml<T>(string xml)

@@ -44,6 +44,10 @@
     <Compile Include="Entities\Album.cs" />
     <Compile Include="Entities\Artist.cs" />
     <Compile Include="Entities\SearchResult.cs" />
+    <Compile Include="Entities\Track.cs" />
+    <Compile Include="Entities\ZuneAlbum.cs" />
+    <Compile Include="Entities\ZuneArtist.cs" />
+    <Compile Include="Entities\ZuneSearchResult.cs" />
     <Compile Include="ZuneClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

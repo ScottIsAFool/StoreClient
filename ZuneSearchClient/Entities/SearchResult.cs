@@ -2,116 +2,23 @@
 
 namespace ZuneSearchClient.Entities
 {
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.w3.org/2005/Atom")]
-        [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.w3.org/2005/Atom", IsNullable = false, ElementName = "feed")]
-        public partial class SearchResults
+    public class SearchResult
+    {
+        internal SearchResult(ZuneResult result)
         {
-            /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute("link")]
-            public FeedLink Link { get; set; }
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute("updated")]
-            public DateTime Updated { get; set; }
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute("title")]
-            public FeedTitle Title { get; set; }
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute("id")]
-            public string Id { get; set; }
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute("entry")]
-            public Result[] Entries { get; set; }
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute("author")]
-            public feedAuthor Author { get; set; }
+            Updated = result.Updated;
+            Name = result.Title.Value;
+            Id = result.Id.Replace("urn:uuid:", "");
+            Type = result.Type;
+            Score = result.Score;
         }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.w3.org/2005/Atom")]
-        [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.w3.org/2005/Atom", IsNullable = false, ElementName = "feedLink")]
-        public partial class FeedLink
-        {
-            /// <remarks/>
-            [System.Xml.Serialization.XmlAttributeAttribute()]
-            public string rel { get; set; }
+        public SearchResult(){}
 
-            /// <remarks/>
-            [System.Xml.Serialization.XmlAttributeAttribute()]
-            public string type { get; set; }
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlAttributeAttribute()]
-            public string href { get; set; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.w3.org/2005/Atom")]
-        [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.w3.org/2005/Atom", IsNullable = false, ElementName = "feedLink")]
-        public partial class FeedTitle
-        {
-            /// <remarks/>
-            [System.Xml.Serialization.XmlAttributeAttribute()]
-            public string type { get; set; }
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlTextAttribute()]
-            public string Value { get; set; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.w3.org/2005/Atom")]
-        [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.w3.org/2005/Atom", IsNullable = false, ElementName = "feedEntry")]
-        public partial class Result
-        {
-            /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute("updated")]
-            public DateTime Updated { get; set; }
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute("title")]
-            public Title Title { get; set; }
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute("id")]
-            public string Id { get; set; }
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/2008/3", ElementName="type")]
-            public string Type { get; set; }
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/2008/3", ElementName= "score")]
-            public decimal Score { get; set; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.w3.org/2005/Atom")]
-        [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.w3.org/2005/Atom", IsNullable = false, ElementName = "feedEntryTitle")]
-        public partial class Title
-        {
-            /// <remarks/>
-            [System.Xml.Serialization.XmlAttributeAttribute("type")]
-            public string Type { get; set; }
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlTextAttribute()]
-            public string Value { get; set; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.w3.org/2005/Atom")]
-        public partial class feedAuthor
-        {
-            /// <remarks/>
-            public string name { get; set; }
-        }
-
-
-    
+        public DateTime Updated { get; private set; }
+        public string Name { get; private set; }
+        public string Id { get; private set; }
+        public string Type { get; private set; }
+        public decimal Score { get; private set; }
+    }
 }

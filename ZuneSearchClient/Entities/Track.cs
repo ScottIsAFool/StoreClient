@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace ZuneSearchClient.Entities
 {
-    public class Album 
+    public class Track
     {
-        internal Album(ZuneAlbum item)
+        internal Track(ZuneTrack item)
         {
-            Label = item.label;
             LabelOwner = item.labelOwner;
             Updated = item.updated;
             Name = item.title.Value;
@@ -16,17 +14,16 @@ namespace ZuneSearchClient.Entities
             ReleaseDate = item.releaseDate;
             IsExplicit = item.isExplicit.Equals("True");
             ArtistId = item.primaryArtist.id;
-            ImageId = item.image.id.Replace("urn:uuid:", "");
-            Tracks = new List<Track>();
-            if (item.Tracks != null)
-            {
-                foreach (var t in item.Tracks) Tracks.Add(t.Result);
-            }
+            AlbumArtistId = item.albumArtist.id;
+            AlbumId = item.album.id;
+            
         }
 
-        public Album(){}
+        public Track(){}
 
-        public string Label { get; set; }
+        public int TrackNumber { get; set; }
+        public int DiscNumber { get; set; }
+        public string AlbumId { get; set; }
         public DateTime Updated { get; set; }
         public string Name { get; set; }
         public string Id { get; set; }
@@ -35,7 +32,6 @@ namespace ZuneSearchClient.Entities
         public DateTime ReleaseDate { get; set; }
         public bool IsExplicit { get; set; }
         public string ArtistId { get; set; }
-        public List<Track> Tracks { get; set; }
-        public string ImageId { get; set; }
+        public string AlbumArtistId { get; set; }
     }
 }
