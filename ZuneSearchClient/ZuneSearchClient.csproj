@@ -43,6 +43,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Entities\Album.cs" />
     <Compile Include="Entities\Artist.cs" />
+    <Compile Include="Entities\ScreenSize.cs" />
     <Compile Include="Entities\SearchResult.cs" />
     <Compile Include="Entities\Track.cs" />
     <Compile Include="Entities\ZuneAlbum.cs" />

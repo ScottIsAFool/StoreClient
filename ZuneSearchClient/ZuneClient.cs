@@ -98,12 +98,46 @@ namespace ZuneSearchClient
             return result.Result;
         }
 
+        public string CreateArtistBackgroundUrl(Artist artist, ScreenSize screenSize)
+        {
+            return CreateArtistBackgroundUrl(artist.Id, screenSize);
+        }
+
+        public string CreateArtistBackgroundUrl(string artistId, ScreenSize screenSize)
+        {
+            var height = "480";
+            switch (screenSize)
+            {
+                case ScreenSize.SevenTwentyP:
+                    height = "720";
+                    break;
+                case ScreenSize.Wvga:
+                    height = "480";
+                    break;
+                case ScreenSize.Wxga:
+                    height = "768";
+                    break;
+            }
+
+            return string.Format(Constants.ArtistBackgroundUrlFormat, artistId, height);
+        }
+
+        public string CreateAlbumArtUrl(Album album)
+        {
+            return CreateAlbumArtUrl(album.ImageId);
+        }
+
+        public string CreateAlbumArtUrl(string albumImageId)
+        {
+            return string.Format(Constants.AlbumArtUrlFormat, albumImageId);
+        }
+
         private static T ParseXml<T>(string xml)
         {
-            var serializer = new XmlSerializer(typeof (T));
+            var serializer = new XmlSerializer(typeof(T));
             using (var reader = new StringReader(xml))
             {
-                var result = (T) serializer.Deserialize(reader);
+                var result = (T)serializer.Deserialize(reader);
                 return result;
             }
         }
