@@ -1,10 +1,11 @@
 ﻿using System;
+using ZuneSearchClient.Entities.Zune;
 
 namespace ZuneSearchClient.Entities
 {
     public class Track
     {
-        internal Track(ZuneTrack item)
+        internal Track(ZuneTrack.feedEntry item)
         {
             LabelOwner = item.labelOwner;
             Updated = item.updated;

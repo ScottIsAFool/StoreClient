@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using ZuneSearchClient.Entities.Zune;
 
 namespace ZuneSearchClient.Entities
 {
     public class Album 
     {
-        internal Album(ZuneAlbum item)
+        internal Album(ZuneAlbum.feed item)
         {
             Label = item.label;
             LabelOwner = item.labelOwner;
@@ -18,10 +19,24 @@ namespace ZuneSearchClient.Entities
             ArtistId = item.primaryArtist.id;
             ImageId = item.image.id.Replace("urn:uuid:", "");
             Tracks = new List<Track>();
-            if (item.Tracks != null)
+            if (item.entry != null)
             {
-                foreach (var t in item.Tracks) Tracks.Add(t.Result);
+                foreach (var t in item.entry) Tracks.Add(new Track(t));
             }
+        }
+
+        internal Album(ZuneAlbumSearch.feedEntry item)
+        {
+            Label = item.label;
+            LabelOwner = item.labelOwner;
+            Updated = item.updated;
+            Name = item.title.Value;
+            Id = item.id.Replace("urn:uuid:", "");
+            SortTitle = item.sortTitle;
+            ReleaseDate = item.releaseDate;
+            IsExplicit = item.isExplicit.Equals("True");
+            ArtistId = item.primaryArtist.id;
+            ImageId = item.image.id.Replace("urn:uuid:", "");
         }
 
         public Album(){}

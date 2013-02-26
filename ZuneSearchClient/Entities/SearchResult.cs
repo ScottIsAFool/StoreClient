@@ -1,24 +1,18 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace ZuneSearchClient.Entities
 {
     public class SearchResult
     {
-        internal SearchResult(ZuneResult result)
+        public SearchResult()
         {
-            Updated = result.Updated;
-            Name = result.Title.Value;
-            Id = result.Id.Replace("urn:uuid:", "");
-            Type = result.Type;
-            Score = result.Score;
+            Albums = new List<Album>();
+            Tracks = new List<Track>();
+            Artists = new List<Artist>();
         }
 
-        public SearchResult(){}
-
-        public DateTime Updated { get; private set; }
-        public string Name { get; private set; }
-        public string Id { get; private set; }
-        public string Type { get; private set; }
-        public decimal Score { get; private set; }
+        public List<Album> Albums { get; set; }
+        public List<Track> Tracks { get; set; }
+        public List<Artist> Artists { get; set; }
     }
 }

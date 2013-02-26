@@ -1,8 +1,16 @@
-﻿namespace ZuneSearchClient.Entities
+﻿using ZuneSearchClient.Entities.Zune;
+
+namespace ZuneSearchClient.Entities
 {
     public class Artist
     {
-        internal Artist(ZuneArtist artist)
+        internal Artist(ZuneArtist.feedEntry artist)
+        {
+            Id = artist.id.Replace("urn:uuid:", "");
+            Name = artist.title.Value;
+        }
+
+        internal Artist(ZuneArtistSearch.feedEntry artist)
         {
             Id = artist.id.Replace("urn:uuid:", "");
             Name = artist.title.Value;

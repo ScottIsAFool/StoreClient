@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using AdvancedREI.Net.Http.Compression;
 using ZuneSearchClient.Entities;
+using ZuneSearchClient.Entities.Zune;
 
 namespace ZuneSearchClient
 {
@@ -24,7 +25,7 @@ namespace ZuneSearchClient
             HttpClient = new HttpClient(new CompressedHttpClientHandler());
         }
 
-        public async Task<List<SearchResult>> SearchAsync(string searchQuery, bool includeAlbums = true, bool includeArtists = true, bool includeTracks = true, bool includePodcasts = true)
+        public async Task<SearchResult> SearchAsync(string searchQuery, bool includeAlbums = true, bool includeArtists = true, bool includeTracks = true, bool includePodcasts = true)
         {
             if (string.IsNullOrEmpty(searchQuery))
             {
@@ -39,13 +40,47 @@ namespace ZuneSearchClient
                                     includePodcasts
                 );
 
-            var xml = await HttpClient.GetStringAsync(url);
+            var searchResult = new SearchResult();
+            //var xml = await HttpClient.GetStringAsync(url);
 
-            var results = ParseXml<ZuneSearchResults>(xml);
+            //var results = ParseXml<ZuneSearchResults.feed>(xml);
 
-            var resultList = results.Entries.Select(r => r.Result).ToList();
+            //var resultList = results.entry.Select(r => new SearchResult(r)).ToList();
 
-            return resultList;
+            if (includeAlbums)
+            {
+                url = string.Format(Constants.SearchUrlFormatSecondary, "album", searchQuery);
+                var alXml = await HttpClient.GetStringAsync(url);
+                var alResults = ParseXml<ZuneAlbumSearch.feed>(alXml);
+                foreach (var result in alResults.entry)
+                {
+                    searchResult.Albums.Add(new Album(result));
+                }
+            }
+
+            if (includeArtists)
+            {
+                url = string.Format(Constants.SearchUrlFormatSecondary, "artist", searchQuery);
+                var arXml = await HttpClient.GetStringAsync(url);
+                var arResults = ParseXml<ZuneArtistSearch.feed>(arXml);
+                foreach (var result in arResults.entry)
+                {
+                    searchResult.Artists.Add(new Artist(result));
+                }
+            }
+
+            if (includeTracks)
+            {
+                url = string.Format(Constants.SearchUrlFormatSecondary, "track", searchQuery);
+                var trXml = await HttpClient.GetStringAsync(url);
+                var trResults = ParseXml<ZuneTrack.feed>(trXml);
+                foreach (var result in trResults.entry)
+                {
+                    searchResult.Tracks.Add(new Track(result));
+                }
+            }
+
+            return searchResult;
         }
 
         public async Task<ZuneArtist> GetArtistInfoAsync(string artistId)
@@ -75,9 +110,9 @@ namespace ZuneSearchClient
 
             var xml = await HttpClient.GetStringAsync(url);
 
-            var result = ParseXml<ZuneAlbumResults>(xml);
+            var result = ParseXml<ZuneAlbumSearch.albumFeed>(xml);
 
-            var returnList = result.Entries.Select(r => r.Result).ToList();
+            var returnList = result.entry.Select(r => new Album(r)).ToList();
 
             return returnList;
         }
@@ -93,9 +128,9 @@ namespace ZuneSearchClient
 
             var xml = await HttpClient.GetStringAsync(url);
 
-            var result = ParseXml<ZuneAlbum>(xml);
+            var result = ParseXml<ZuneAlbum.feed>(xml);
 
-            return result.Result;
+            return new Album(result);
         }
 
         public string CreateArtistBackgroundUrl(Artist artist, ScreenSize screenSize)

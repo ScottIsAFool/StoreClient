@@ -46,9 +46,13 @@
     <Compile Include="Entities\ScreenSize.cs" />
     <Compile Include="Entities\SearchResult.cs" />
     <Compile Include="Entities\Track.cs" />
-    <Compile Include="Entities\ZuneAlbum.cs" />
-    <Compile Include="Entities\ZuneArtist.cs" />
-    <Compile Include="Entities\ZuneSearchResult.cs" />
+    <Compile Include="Entities\Zune\ZuneAlbum.cs" />
+    <Compile Include="Entities\Zune\ZuneAlbumSearch.cs" />
+    <Compile Include="Entities\Zune\ZuneArtist.cs" />
+    <Compile Include="Entities\Zune\ZuneArtistSearch.cs" />
+    <Compile Include="Entities\Zune\ZuneSearchResult.cs" />
+    <Compile Include="Entities\Zune\ZuneTrack.cs" />
+    <Compile Include="Entities\Zune\ZuneTrackSearch.cs" />
     <Compile Include="ZuneClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
