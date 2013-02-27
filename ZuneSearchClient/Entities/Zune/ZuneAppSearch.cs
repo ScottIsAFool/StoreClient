@@ -47,7 +47,7 @@ namespace ZuneSearchClient.Entities.Zune
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.w3.org/2005/Atom")]
-        public partial class feedEntry
+        public partial class feedEntry  
         {
             /// <remarks/>
             public DateTime updated { get; set; }

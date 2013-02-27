@@ -14,42 +14,34 @@ namespace ZuneSearchClient
     public class ZuneClient
     {
         public HttpClient HttpClient { get; private set; }
+        public string Locale { get; set; }
 
         public ZuneClient(HttpMessageHandler handler)
         {
             HttpClient = new HttpClient(handler);
+            Locale = "en-US";
         }
 
         public ZuneClient()
         {
             HttpClient = new HttpClient(new CompressedHttpClientHandler());
+            Locale = "en-US";
         }
 
-        public async Task<SearchResult> SearchAsync(string searchQuery, bool includeAlbums = true, bool includeArtists = true, bool includeTracks = true, bool includePodcasts = true)
+        public async Task<SearchResult> SearchAsync(string searchQuery, bool includeAlbums = true, bool includeArtists = true, bool includeTracks = true, bool includePodcasts = true, bool includeApps = true)
         {
             if (string.IsNullOrEmpty(searchQuery))
             {
                 throw new NullReferenceException("SearchQuery cannot be null or empty");
             }
 
-            var url = string.Format(Constants.SearchUrlFormat, searchQuery,
-                                    false,
-                                    includeAlbums,
-                                    includeArtists,
-                                    includeTracks,
-                                    includePodcasts
-                );
+            var url = "";
 
             var searchResult = new SearchResult();
-            //var xml = await HttpClient.GetStringAsync(url);
-
-            //var results = ParseXml<ZuneSearchResults.feed>(xml);
-
-            //var resultList = results.entry.Select(r => new SearchResult(r)).ToList();
 
             if (includeAlbums)
             {
-                url = string.Format(Constants.SearchUrlFormatSecondary, "album", searchQuery);
+                url = string.Format(Constants.SearchUrlMusicFormatSecondary, Locale, "album", searchQuery);
                 var alXml = await HttpClient.GetStringAsync(url);
                 var alResults = ParseXml<ZuneAlbumSearch.feed>(alXml);
                 foreach (var result in alResults.entry)
@@ -60,7 +52,7 @@ namespace ZuneSearchClient
 
             if (includeArtists)
             {
-                url = string.Format(Constants.SearchUrlFormatSecondary, "artist", searchQuery);
+                url = string.Format(Constants.SearchUrlMusicFormatSecondary, Locale, "artist", searchQuery);
                 var arXml = await HttpClient.GetStringAsync(url);
                 var arResults = ParseXml<ZuneArtistSearch.feed>(arXml);
                 foreach (var result in arResults.entry)
@@ -71,12 +63,23 @@ namespace ZuneSearchClient
 
             if (includeTracks)
             {
-                url = string.Format(Constants.SearchUrlFormatSecondary, "track", searchQuery);
+                url = string.Format(Constants.SearchUrlMusicFormatSecondary, Locale, "track", searchQuery);
                 var trXml = await HttpClient.GetStringAsync(url);
                 var trResults = ParseXml<ZuneTrack.feed>(trXml);
                 foreach (var result in trResults.entry)
                 {
                     searchResult.Tracks.Add(new Track(result));
+                }
+            }
+
+            if (includeApps)
+            {
+                url = string.Format(Constants.SearchUrlAppFormat, Locale, searchQuery);
+                var apXml = await HttpClient.GetStringAsync(url);
+                var apResults = ParseXml<ZuneAppSearch.feed>(apXml);
+                foreach (var result in apResults.entry)
+                {
+                    searchResult.StoreApps.Add(new StoreApp(result));
                 }
             }
 
@@ -90,7 +93,7 @@ namespace ZuneSearchClient
                 throw new NullReferenceException("Artist Id cannot be null or empty");
             }
 
-            var url = string.Format(Constants.ArtistUrlFormat, artistId, "biography");
+            var url = string.Format(Constants.ArtistUrlFormat, Locale, artistId, "biography");
 
             var xml = await HttpClient.GetStringAsync(url);
 
@@ -106,7 +109,7 @@ namespace ZuneSearchClient
                 throw new NullReferenceException("Artist Id cannot be null or empty");
             }
 
-            var url = string.Format(Constants.ArtistUrlFormat, artistId, "albums");
+            var url = string.Format(Constants.ArtistUrlFormat, Locale, artistId, "albums");
 
             var xml = await HttpClient.GetStringAsync(url);
 
@@ -124,7 +127,7 @@ namespace ZuneSearchClient
                 throw new NullReferenceException("Album Id cannot be null or empty");
             }
 
-            var url = string.Format(Constants.AlbumUrlFormat, albumId);
+            var url = string.Format(Constants.AlbumUrlFormat, Locale, albumId);
 
             var xml = await HttpClient.GetStringAsync(url);
 
@@ -154,7 +157,7 @@ namespace ZuneSearchClient
                     break;
             }
 
-            return string.Format(Constants.ArtistBackgroundUrlFormat, artistId, height);
+            return string.Format(Constants.ArtistBackgroundUrlFormat, Locale, artistId, height);
         }
 
         public string CreateAlbumArtUrl(Album album)
@@ -164,7 +167,7 @@ namespace ZuneSearchClient
 
         public string CreateAlbumArtUrl(string albumImageId)
         {
-            return string.Format(Constants.AlbumArtUrlFormat, albumImageId);
+            return string.Format(Constants.AlbumArtUrlFormat, Locale, albumImageId);
         }
 
         private static T ParseXml<T>(string xml)

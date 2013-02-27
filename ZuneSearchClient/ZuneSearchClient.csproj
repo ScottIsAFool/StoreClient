@@ -45,6 +45,8 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Entities\Album.cs" />
     <Compile Include="Entities\Artist.cs" />
+    <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\ClientType.cs" />
     <Compile Include="Entities\ScreenSize.cs" />
     <Compile Include="Entities\SearchResult.cs" />
     <Compile Include="Entities\StoreApp.cs" />

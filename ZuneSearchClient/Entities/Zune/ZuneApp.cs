@@ -182,11 +182,11 @@ namespace ZuneSearchClient.Entities.Zune
 
             /// <remarks/>
             [System.Xml.Serialization.XmlArrayAttribute(Namespace = "http://schemas.zune.net/catalog/apps/2008/02"), System.Xml.Serialization.XmlArrayItemAttribute("clientType", IsNullable = false)]
-            public clientTypes[] clientTypes { get; set; }
+            public string[] clientTypes { get; set; }
 
             /// <remarks/>
             [System.Xml.Serialization.XmlArrayAttribute(Namespace = "http://schemas.zune.net/catalog/apps/2008/02"), System.Xml.Serialization.XmlArrayItemAttribute("supportedLanguage", IsNullable = false)]
-            public supportedLanguages[] supportedLanguages { get; set; }
+            public string[] supportedLanguages { get; set; }
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/apps/2008/02")]
