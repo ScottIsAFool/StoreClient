@@ -16,8 +16,10 @@ Installing this can be done through nuget, just use the following command:
 Usage is very simple and uses the async/await methodology.
 
 A simple search:
-`var client = new StoreClient();
-var results = await client.SearchAsync("The Dark Knight", includeArtists: false, includeTracks: false);`
+```c#
+var client = new StoreClient();
+var results = await client.SearchAsync("The Dark Knight", includeArtists: false, includeTracks: false);
+```
 
 Getting an album's image URL:
 `var client = new StoreClient();
