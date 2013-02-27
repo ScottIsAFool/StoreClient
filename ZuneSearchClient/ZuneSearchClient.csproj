@@ -16,6 +16,7 @@
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <NuSpecFile>ZuneSearchClient.nuspec</NuSpecFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,6 +39,7 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="ZuneSearchClient.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
@@ -45,11 +47,15 @@
     <Compile Include="Entities\Artist.cs" />
     <Compile Include="Entities\ScreenSize.cs" />
     <Compile Include="Entities\SearchResult.cs" />
+    <Compile Include="Entities\StoreApp.cs" />
     <Compile Include="Entities\Track.cs" />
     <Compile Include="Entities\Zune\ZuneAlbum.cs" />
     <Compile Include="Entities\Zune\ZuneAlbumSearch.cs" />
+    <Compile Include="Entities\Zune\ZuneApp.cs" />
+    <Compile Include="Entities\Zune\ZuneAppSearch.cs" />
     <Compile Include="Entities\Zune\ZuneArtist.cs" />
     <Compile Include="Entities\Zune\ZuneArtistSearch.cs" />
+    <Compile Include="Entities\Zune\ZuneCommon.cs" />
     <Compile Include="Entities\Zune\ZuneSearchResult.cs" />
     <Compile Include="Entities\Zune\ZuneTrack.cs" />
     <Compile Include="Entities\Zune\ZuneTrackSearch.cs" />
@@ -89,8 +95,7 @@
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.0-rc\tools\Microsoft.Bcl.Build.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir).nuget\nuget.exe" pack "$(ProjectPath)" -OutputDirectory ..\..\..\</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -10,7 +10,7 @@ namespace ZuneSearchClient.Entities.Zune
         public partial class feed
         {
             /// <remarks/>
-            public ZuneAlbum.feedLink link { get; set; }
+            public ZuneCommon.feedLink link { get; set; }
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://a9.com/-/spec/opensearch/1.1/")]
@@ -28,7 +28,7 @@ namespace ZuneSearchClient.Entities.Zune
             public DateTime updated { get; set; }
 
             /// <remarks/>
-            public ZuneAlbum.feedTitle title { get; set; }
+            public ZuneCommon.feedTitle title { get; set; }
 
             /// <remarks/>
             public string id { get; set; }
@@ -38,7 +38,7 @@ namespace ZuneSearchClient.Entities.Zune
             public feedEntry[] entry { get; set; }
 
             /// <remarks/>
-            public ZuneAlbum.feedAuthor author { get; set; }
+            public ZuneCommon.feedAuthor author { get; set; }
         }
 
 
@@ -50,7 +50,7 @@ namespace ZuneSearchClient.Entities.Zune
             public DateTime updated { get; set; }
 
             /// <remarks/>
-            public ZuneAlbum.feedEntryTitle title { get; set; }
+            public ZuneCommon.feedEntryTitle title { get; set; }
 
             /// <remarks/>
             public string id { get; set; }
@@ -61,7 +61,7 @@ namespace ZuneSearchClient.Entities.Zune
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/music/2007/10")]
-            public ZuneAlbum.primaryGenre primaryGenre { get; set; }
+            public ZuneCommon.primaryGenre primaryGenre { get; set; }
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/music/2007/10")]
@@ -73,7 +73,7 @@ namespace ZuneSearchClient.Entities.Zune
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/music/2007/10")]
-            public ZuneAlbum.image image { get; set; }
+            public ZuneCommon.image image { get; set; }
         }
     }
 }
