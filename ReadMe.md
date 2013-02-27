@@ -17,23 +17,28 @@ Usage is very simple and uses the async/await methodology.
 
 A simple search:
 ```c#
-var client = new StoreClient();
+var client = new StoreApiClient();
 var results = await client.SearchAsync("The Dark Knight", includeArtists: false, includeTracks: false);
 ```
 
 Getting an album's image URL:
 ```c#
-var client = new StoreClient();
+var client = new StoreApiClient();
 var url = client.CreateAlbumArtUrl("534be700-0000-0000-0000-000000000000");
 ```
 
 Get an app's icon (the one that appears in the store):
 ```c#
-var client = new StoreClient();
+var client = new StoreApiClient();
 var url = var url = client.CreateAppImageUrl("490f05d0-ee29-4f5f-b5c9-66b48c6f63a2", ImageType.IconLarge);
 ```
 
 ## Other notes ##
-- If you want, you can pass in your own implementation of an `HttpMessageHandler` when you create your instance of `StoreClient`, however, by default, one is used and has compression turned on.
-- You can also change what country the store searches by setting the `Locale` property of `StoreClient`.
+- If you want, you can pass in your own implementation of an `HttpMessageHandler` when you create your instance of `StoreApiClient`, however, by default, one is used and has compression turned on.
+- You can also change what country the store searches by setting the `Locale` property of `StoreApiClient`.
 
+## Sample app? ##
+Sort of, it doesn't really do much yet though, will build it up a wee bit though.
+
+## Future versions? ##
+I hope so. See what the future holds.
