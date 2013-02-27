@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreClient", "StoreClient\StoreClient.csproj", "{618577BB-FFFD-4739-B3AD-A74E71F77064}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{74F011F0-055E-488F-8220-F3A0C085F0CF}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreClientApp", "StoreClientApp\StoreClientApp.csproj", "{0737458F-AB56-4686-A22D-635F81DCC26D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DA411D3B-0C86-4294-A166-F79D54777539}"
+	ProjectSection(SolutionItems) = preProject
+		nuspec.2010.7.xsd = nuspec.2010.7.xsd
+		nuspec.2011.8.xsd = nuspec.2011.8.xsd
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{618577BB-FFFD-4739-B3AD-A74E71F77064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{618577BB-FFFD-4739-B3AD-A74E71F77064}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{618577BB-FFFD-4739-B3AD-A74E71F77064}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{618577BB-FFFD-4739-B3AD-A74E71F77064}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{618577BB-FFFD-4739-B3AD-A74E71F77064}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{618577BB-FFFD-4739-B3AD-A74E71F77064}.Release|Any CPU.Build.0 = Release|Any CPU
+		{618577BB-FFFD-4739-B3AD-A74E71F77064}.Release|ARM.ActiveCfg = Release|Any CPU
+		{618577BB-FFFD-4739-B3AD-A74E71F77064}.Release|x86.ActiveCfg = Release|Any CPU
+		{0737458F-AB56-4686-A22D-635F81DCC26D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0737458F-AB56-4686-A22D-635F81DCC26D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0737458F-AB56-4686-A22D-635F81DCC26D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0737458F-AB56-4686-A22D-635F81DCC26D}.Debug|ARM.ActiveCfg = Debug|ARM
+		{0737458F-AB56-4686-A22D-635F81DCC26D}.Debug|ARM.Build.0 = Debug|ARM
+		{0737458F-AB56-4686-A22D-635F81DCC26D}.Debug|ARM.Deploy.0 = Debug|ARM
+		{0737458F-AB56-4686-A22D-635F81DCC26D}.Debug|x86.ActiveCfg = Debug|x86
+		{0737458F-AB56-4686-A22D-635F81DCC26D}.Debug|x86.Build.0 = Debug|x86
+		{0737458F-AB56-4686-A22D-635F81DCC26D}.Debug|x86.Deploy.0 = Debug|x86
+		{0737458F-AB56-4686-A22D-635F81DCC26D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0737458F-AB56-4686-A22D-635F81DCC26D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0737458F-AB56-4686-A22D-635F81DCC26D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{0737458F-AB56-4686-A22D-635F81DCC26D}.Release|ARM.ActiveCfg = Release|ARM
+		{0737458F-AB56-4686-A22D-635F81DCC26D}.Release|ARM.Build.0 = Release|ARM
+		{0737458F-AB56-4686-A22D-635F81DCC26D}.Release|ARM.Deploy.0 = Release|ARM
+		{0737458F-AB56-4686-A22D-635F81DCC26D}.Release|x86.ActiveCfg = Release|x86
+		{0737458F-AB56-4686-A22D-635F81DCC26D}.Release|x86.Build.0 = Release|x86
+		{0737458F-AB56-4686-A22D-635F81DCC26D}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
