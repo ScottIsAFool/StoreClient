@@ -7,6 +7,8 @@ namespace ZuneSearchClient.Entities
 {
     public class StoreApp
     {
+        public StoreApp(){}
+
         internal StoreApp(ZuneAppSearch.feedEntry item)
         {
             ClientTypes = new List<ClientType>();
@@ -67,6 +69,7 @@ namespace ZuneSearchClient.Entities
             Price = purchaseItem.displayPrice;
             Currency = purchaseItem.priceCurrencyCode;
             ScreenshotIds = item.screenshots.ToList().Select(x => x.id).ToList();
+            Content = item.content.Value;
         }
 
         public string SortName { get; set; }
@@ -93,5 +96,6 @@ namespace ZuneSearchClient.Entities
         public bool HasTrial { get; set; }
         public List<string> SupportedLanguages { get; set; }
         public List<string> ScreenshotIds { get; set; }
+        public string Content { get; set; }
     }
 }

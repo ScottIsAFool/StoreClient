@@ -7,6 +7,7 @@
         internal const string SearchUrlAppFormat = "http://marketplaceedgeservice.windowsphone.com/v8/catalog/apps?os=8.0.9903.0&cc=US&oc=&lang={0}&hw=469838850&dm=Virtual&oemId=Microsoft&moId=&chunkSize=50&q={1}&cf=";
         internal const string ArtistUrlFormat = "http://catalog.zune.net/v3.2/{0}/music/artist/{1}/{2}";
         internal const string AlbumUrlFormat = "http://catalog.zune.net/v3.2/{0}/music/album/{1}";
+        internal const string AppUrlFormat = "http://marketplaceedgeservice.windowsphone.com/v8/catalog/apps/{0}?os=8.0.9903.0&cc=US&oc=&lang={1}&hw=469838850&dm=Virtual&oemId=Microsoft&moId=&cf=";
         internal const string AlbumArtUrlFormat = "http://image.catalog.zune.net/v3.2/{0}/image/{1}?width=320&height=320&resize=true&contenttype=image/jpeg";
         internal const string ArtistBackgroundUrlFormat = "http://image.catalog.zune.net/v3.2/{0}/music/artist/{1}/primaryimage?height={2}&contenttype=image/jpeg&resize=true";
     }
