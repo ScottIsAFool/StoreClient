@@ -78,7 +78,7 @@ namespace StoreClient.Entities.Zune
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/apps/2008/02")]
-            public string backgroundImage { get; set; }
+            public backgroundImage backgroundImage { get; set; }
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/apps/2008/02")]
@@ -93,6 +93,15 @@ namespace StoreClient.Entities.Zune
 
             /// <remarks/>
             public ZuneCommon.feedAuthor author { get; set; }
+        }
+
+            /// <remarks/>
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://schemas.zune.net/catalog/apps/2008/02")]
+        [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://schemas.zune.net/catalog/apps/2008/02", IsNullable = false)]
+        public partial class backgroundImage
+        {
+                /// <remarks/>
+                public string id { get; set; }
         }
 
         /// <remarks/>
@@ -221,6 +230,51 @@ namespace StoreClient.Entities.Zune
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute("supportedLanguage")]
             public string[] supportedLanguage { get; set; }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+        public partial class capabilities
+        {
+            /// <remarks/>
+            [System.Xml.Serialization.XmlElementAttribute("capability")]
+            public capabilitiesCapability[] capability { get; set; }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlElementAttribute("hwCapability")]
+            public capabilitiesHwCapability[] hwCapability { get; set; }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class capabilitiesCapability
+        {
+            /// <remarks/>
+            public string id { get; set; }
+
+            /// <remarks/>
+            public string @string { get; set; }
+
+            /// <remarks/>
+            public string disclosure { get; set; }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class capabilitiesHwCapability
+        {
+            /// <remarks/>
+            public string requirementType { get; set; }
+
+            /// <remarks/>
+            public string id { get; set; }
+
+            /// <remarks/>
+            public string @string { get; set; }
+
+            /// <remarks/>
+            public bool required { get; set; }
         }
 
 

@@ -45,6 +45,8 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Entities\Album.cs" />
     <Compile Include="Entities\Artist.cs" />
+    <Compile Include="Entities\Capability.cs" />
+    <Compile Include="Entities\CapabilityType.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\ClientType.cs" />
     <Compile Include="Entities\ScreenSize.cs" />

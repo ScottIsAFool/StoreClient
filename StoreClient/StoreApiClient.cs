@@ -317,12 +317,21 @@ namespace StoreClient
                 case ImageType.BackgroundArt:
                     formatType = "background_art";
                     break;
+                case ImageType.WindowsPhoneStoreMedium:
+                    formatType = "ws_icon_large";
+                    break;
+                case ImageType.WindowsPhoneStoreSmall:
+                    formatType = "ws_icon_small";
+                    break;
+                case ImageType.WindowsPhoneStoreLarge:
+                    formatType = "ws_icon_medium"; // For some reason, the medium image is bigger than the large image. Meh.
+                    break;
             }
 
             return string.Format(Constants.ScreenshotUrlFormat, imageId, formatType);
         }
 
-        private static T ParseXml<T>(string xml)
+        internal static T ParseXml<T>(string xml)
         {
             var serializer = new XmlSerializer(typeof(T));
             using (var reader = new StringReader(xml))

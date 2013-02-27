@@ -7,5 +7,8 @@
         IconLarge,
         Screenshot,
         ScreenshotThumbnail,
+        WindowsPhoneStoreLarge,
+        WindowsPhoneStoreMedium,
+        WindowsPhoneStoreSmall
     }
 }

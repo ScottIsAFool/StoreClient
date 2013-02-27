@@ -59,7 +59,7 @@ namespace StoreClient.Entities
             UserRating = item.averageUserRating;
             UserRatingCount = item.userRatingCount;
             ImageId = item.image.id.Replace("urn:uuid:", "");
-            BackgroundImageId = item.backgroundImage.Replace("urn:uuid:", "");
+            BackgroundImageId = item.backgroundImage.id.Replace("urn:uuid:", "");
             Category = new Category(item.categories.category);
             Tags = item.tags.tag;
             PublisherName = item.publisher;
@@ -71,6 +71,21 @@ namespace StoreClient.Entities
             Currency = purchaseItem.priceCurrencyCode;
             ScreenshotIds = item.screenshots.ToList().Select(x => x.id).ToList();
             Content = item.content.Value;
+            Capabilities = ParseCapabilities(item.entry.deviceCapabilities);
+        }
+
+        private static List<Capability> ParseCapabilities(string xml)
+        {
+            var fixedXml = Uri.UnescapeDataString(xml);
+
+            fixedXml = string.Format("<capabilities>{0}</capabilities>", fixedXml);
+
+            var caps = StoreApiClient.ParseXml<ZuneApp.capabilities>(fixedXml);
+
+            var result = caps.capability.Select(cap => new Capability(cap)).ToList();
+            result.AddRange(caps.hwCapability.Select(cap => new Capability(cap)));
+
+            return result;
         }
 
         public string SortName { get; set; }
@@ -99,5 +114,6 @@ namespace StoreClient.Entities
         public List<string> ScreenshotIds { get; set; }
         public string Content { get; set; }
         public string BackgroundImageId { get; set; }
+        public List<Capability> Capabilities { get; set; }
     }
 }
