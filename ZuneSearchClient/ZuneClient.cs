@@ -262,6 +262,38 @@ namespace ZuneSearchClient
             return string.Format(Constants.AlbumArtUrlFormat, Locale, albumImageId);
         }
 
+        /// <summary>
+        /// Creates the app image URL.
+        /// </summary>
+        /// <param name="imageId">The image id.</param>
+        /// <param name="imageType">The image type.</param>
+        /// <returns></returns>
+        public string CreateAppImageUrl(string imageId, ImageType imageType)
+        {
+            var formatType = "";
+
+            switch (imageType)
+            {
+                case ImageType.IconLarge:
+                    formatType = "icon_large";
+                    break;
+                case ImageType.IconSmall:
+                    formatType = "icon_small";
+                    break;
+                case ImageType.Screenshot:
+                    formatType = "screenshot";
+                    break;
+                case ImageType.ScreenshotThumbnail:
+                    formatType = "screenshot_thumbnail";
+                    break;
+                case ImageType.BackgroundArt:
+                    formatType = "background_art";
+                    break;
+            }
+
+            return string.Format(Constants.ScreenshotUrlFormat, imageId, formatType);
+        }
+
         private static T ParseXml<T>(string xml)
         {
             var serializer = new XmlSerializer(typeof(T));

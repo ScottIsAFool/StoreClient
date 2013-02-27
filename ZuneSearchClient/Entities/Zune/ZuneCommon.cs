@@ -47,9 +47,6 @@ namespace ZuneSearchClient.Entities.Zune
             public string Value { get; set; }
         }
 
-        /// <remarks/>
-        [XmlType(AnonymousType = true, Namespace = "http://schemas.zune.net/catalog/music/2007/10")]
-        [XmlRoot(Namespace = "http://schemas.zune.net/catalog/music/2007/10", IsNullable = false)]
         public partial class image
         {
             /// <remarks/>
@@ -117,28 +114,20 @@ namespace ZuneSearchClient.Entities.Zune
             /// <remarks/>
             public string name { get; set; }
         }
-
-        /// <remarks/>
-        [XmlType(AnonymousType = true, Namespace = "http://schemas.zune.net/catalog/music/2007/10")]
-        [XmlRoot(Namespace = "http://schemas.zune.net/catalog/music/2007/10", IsNullable = false)]
+        
         public partial class rights
         {
             /// <remarks/>
             [XmlElement("right")]
             public rightsRight[] right { get; set; }
         }
-
-        /// <remarks/>
-        [XmlType(AnonymousType = true, Namespace = "http://schemas.zune.net/catalog/apps/2008/02")]
-        [XmlRoot(Namespace = "http://schemas.zune.net/catalog/apps/2008/02", IsNullable = false)]
+        
         public partial class categories
         {
             /// <remarks/>
             public categoriesCategory category { get; set; }
         }
 
-        /// <remarks/>
-        [XmlType(AnonymousType = true, Namespace = "http://schemas.zune.net/catalog/apps/2008/02")]
         public partial class categoriesCategory
         {
             /// <remarks/>

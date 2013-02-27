@@ -59,6 +59,7 @@ namespace ZuneSearchClient.Entities
             UserRating = item.averageUserRating;
             UserRatingCount = item.userRatingCount;
             ImageId = item.image.id.Replace("urn:uuid:", "");
+            BackgroundImageId = item.backgroundImage.Replace("urn:uuid:", "");
             Category = new Category(item.categories.category);
             Tags = item.tags.tag;
             PublisherName = item.publisher;
@@ -97,5 +98,6 @@ namespace ZuneSearchClient.Entities
         public List<string> SupportedLanguages { get; set; }
         public List<string> ScreenshotIds { get; set; }
         public string Content { get; set; }
+        public string BackgroundImageId { get; set; }
     }
 }

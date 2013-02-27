@@ -61,6 +61,7 @@
     <Compile Include="Entities\Zune\ZuneSearchResult.cs" />
     <Compile Include="Entities\Zune\ZuneTrack.cs" />
     <Compile Include="Entities\Zune\ZuneTrackSearch.cs" />
+    <Compile Include="ImageType.cs" />
     <Compile Include="ZuneClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

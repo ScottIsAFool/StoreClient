@@ -21,8 +21,9 @@ namespace ZuneClientApp
         {
             var client = new ZuneClient();
 
-            var results = await client.SearchAsync("Dark Knight", includeArtists: false, includeTracks: false);
+            //var results = await client.SearchAsync("Dark Knight", includeArtists: false, includeTracks: false);
             //var results = await client.GetAlbumsForArtistAsync("790f0000-0200-11db-89ca-0019b92a3933");
+            var result = await client.GetAppInfoAsync("3e1d2705-20aa-437e-b5b9-88f96502879e");
 
             var s = new StringBuilder();
             
