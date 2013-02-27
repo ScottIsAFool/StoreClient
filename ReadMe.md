@@ -5,7 +5,7 @@ StoreClient is a Portable Class Library that will allow you to acces the data us
 
 ## What frameworks are targetted? ##
 ![Target ALL THE FRAMEWORKS](http://cdn.memegenerator.net/instances/400x/35496697.jpg)
-Basically, .NET 4.0+, Windows Phone (7 and 8), Windows Store.
+Basically, .NET 4.0+, Silverlight 4+, Windows Phone (7 and 8), Windows Store.
 
 ## Installation ##
 Installing this can be done through nuget, just use the following command:
