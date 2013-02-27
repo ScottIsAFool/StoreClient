@@ -22,12 +22,14 @@ var results = await client.SearchAsync("The Dark Knight", includeArtists: false,
 ```
 
 Getting an album's image URL:
-`var client = new StoreClient();
-var url = client.CreateAlbumArtUrl("534be700-0000-0000-0000-000000000000");`
+```c#
+var client = new StoreClient();
+var url = client.CreateAlbumArtUrl("534be700-0000-0000-0000-000000000000");```
 
 Get an app's icon (the one that appears in the store):
-`var client = new StoreClient();
-var url = var url = client.CreateAppImageUrl("490f05d0-ee29-4f5f-b5c9-66b48c6f63a2", ImageType.IconLarge);`
+```c#
+var client = new StoreClient();
+var url = var url = client.CreateAppImageUrl("490f05d0-ee29-4f5f-b5c9-66b48c6f63a2", ImageType.IconLarge);```
 
 ## Other notes ##
 - If you want, you can pass in your own implementation of an `HttpMessageHandler` when you create your instance of `StoreClient`, however, by default, one is used and has compression turned on.
