@@ -19,7 +19,7 @@ namespace ZuneClientApp
 
         private async void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
-            var client = new StoreClient.StoreApiClient();
+            var client = new StoreApiClient();
 
             //var results = await client.SearchAsync("Dark Knight", includeArtists: false, includeTracks: false);
             //var results = await client.GetAlbumsForArtistAsync("790f0000-0200-11db-89ca-0019b92a3933");
