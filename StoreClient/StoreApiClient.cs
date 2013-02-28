@@ -372,7 +372,7 @@ namespace StoreClient
         /// <param name="locale">The locale.</param>
         /// <returns></returns>
         /// <exception cref="System.NullReferenceException">Genre Id cannot be null or empty</exception>
-        public async Task<TrackCollection> GetTracksByGenre(string genreId, MusicSearchBy musicSearchBy = MusicSearchBy.SalesRank, string marker = "afterMarker=CgAAAA%3d%3d", string locale = null)
+        public async Task<TrackCollection> GetTracksByGenreAsync(string genreId, MusicSearchBy musicSearchBy = MusicSearchBy.SalesRank, string marker = "afterMarker=CgAAAA%3d%3d", string locale = null)
         {
             if (string.IsNullOrEmpty(genreId))
             {
