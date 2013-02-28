@@ -17,7 +17,20 @@ namespace StoreClient.Entities
             ArtistId = item.primaryArtist.id;
             AlbumArtistId = item.albumArtist.id;
             AlbumId = item.album.id;
-            
+        }
+
+        internal Track(ZuneTrackSearch.feedEntry item)
+        {
+            LabelOwner = item.labelOwner;
+            Updated = item.updated;
+            Name = item.title.Value;
+            Id = item.id.Replace("urn:uuid:", "");
+            SortTitle = item.sortTitle;
+            ReleaseDate = item.releaseDate;
+            IsExplicit = item.isExplicit.Equals("True");
+            ArtistId = item.primaryArtist.id;
+            AlbumArtistId = item.albumArtist.id;
+            AlbumId = item.album.id;
         }
 
         public Track(){}

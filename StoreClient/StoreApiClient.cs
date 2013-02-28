@@ -365,6 +365,36 @@ namespace StoreClient
         }
 
         /// <summary>
+        /// Gets the tracks by genre.
+        /// </summary>
+        /// <param name="genreId">The genre id.</param>
+        /// <param name="musicSearchBy">The music search by.</param>
+        /// <param name="marker">The next/previous marker to get next/previous items</param>
+        /// <param name="locale">The locale.</param>
+        /// <returns></returns>
+        /// <exception cref="System.NullReferenceException">Genre Id cannot be null or empty</exception>
+        public async Task<TrackCollection> GetTracksByGenre(string genreId, MusicSearchBy musicSearchBy = MusicSearchBy.SalesRank, string marker = "afterMarker=CgAAAA%3d%3d", string locale = null)
+        {
+            if (string.IsNullOrEmpty(genreId))
+            {
+                throw new NullReferenceException("Genre Id cannot be null or empty");
+            }
+
+            locale = string.IsNullOrEmpty(locale) ? Locale : locale;
+
+            var url = string.Format(Constants.ItemsByGenreUrlFormat, locale, genreId, "tracks", musicSearchBy.ToString(), marker);
+
+            var xml = await HttpClient.GetStringAsync(url);
+
+            var result = ParseXml<ZuneTrackSearch.feed>(xml);
+
+            var resultList = new TrackCollection(result.entry.Select(x => new Track(x)).ToList());
+            resultList.ProcessLinks(result.link);
+
+            return resultList;
+        }
+
+        /// <summary>
         /// Gets the app info async.
         /// </summary>
         /// <param name="appId">The app id.</param>
