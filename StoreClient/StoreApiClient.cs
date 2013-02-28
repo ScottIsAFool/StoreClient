@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -312,7 +311,7 @@ namespace StoreClient
         /// <param name="locale">The locale.</param>
         /// <returns></returns>
         /// <exception cref="System.NullReferenceException">Genre Id cannot be null or empty</exception>
-        public async Task<AlbumCollection> GetAlbumsByGenre(string genreId, MusicSearchBy musicSearchBy = MusicSearchBy.SalesRank, string marker = "afterMarker=CgAAAA%3d%3d", string locale = null)
+        public async Task<AlbumCollection> GetAlbumsByGenreAsync(string genreId, MusicSearchBy musicSearchBy = MusicSearchBy.SalesRank, string marker = "afterMarker=CgAAAA%3d%3d", string locale = null)
         {
             if (string.IsNullOrEmpty(genreId))
             {
@@ -343,7 +342,7 @@ namespace StoreClient
         /// <param name="locale">The locale.</param>
         /// <returns></returns>
         /// <exception cref="System.NullReferenceException">Genre Id cannot be null or empty</exception>
-        public async Task<ArtistCollection> GetArtistsByGenre(string genreId, MusicSearchBy musicSearchBy = MusicSearchBy.SalesRank, string marker = "afterMarker=CgAAAA%3d%3d", string locale = null)
+        public async Task<ArtistCollection> GetArtistsByGenreAsync(string genreId, MusicSearchBy musicSearchBy = MusicSearchBy.SalesRank, string marker = "afterMarker=CgAAAA%3d%3d", string locale = null)
         {
             if (string.IsNullOrEmpty(genreId))
             {

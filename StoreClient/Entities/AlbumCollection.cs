@@ -6,7 +6,7 @@ namespace StoreClient.Entities
     {
         public AlbumCollection(IEnumerable<Album> list)
         {
-            this.AddRange(list);
+            AddRange(list);
         }
     }
 
@@ -14,7 +14,7 @@ namespace StoreClient.Entities
     {
         public ArtistCollection(IEnumerable<Artist> list)
         {
-            this.AddRange(list);
+            AddRange(list);
         }
     }
 
@@ -22,7 +22,7 @@ namespace StoreClient.Entities
     {
         public TrackCollection(IEnumerable<Track> list)
         {
-            this.AddRange(list);
+            AddRange(list);
         }
     }
 
@@ -30,7 +30,7 @@ namespace StoreClient.Entities
     {
         public StoreAppCollection(IEnumerable<StoreApp> list)
         {
-            this.AddRange(list);
+            AddRange(list);
         }
     }
 
@@ -38,7 +38,7 @@ namespace StoreClient.Entities
     {
         public CategoryCollection(IEnumerable<Category> list)
         {
-            this.AddRange(list);
+            AddRange(list);
         }
     }
 }

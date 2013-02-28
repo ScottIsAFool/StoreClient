@@ -42,3 +42,13 @@ Sort of, it doesn't really do much yet though, will build it up a wee bit though
 
 ## Future versions? ##
 I hope so. See what the future holds.
+
+## Changelog ##
+***0.2.0.0***
+Added the following methods:
+- `GetAppsListAsync` lets you get a list of apps with different criteria (like, new apps, apps by category etc)
+- `GetAppCategoriesAsync` gets the list of all the app categories
+- `GetMusicGenresAsync` gets the list of all music genres
+- `GetAlbumsByGenreAsync` gets the list of albums for a genre
+- `GetArtistsByGenreAsync` gets the list of artists for a genre
+- `GetTracksByGenreAsync` gets the list of tracks for a genre based on sort criteria
