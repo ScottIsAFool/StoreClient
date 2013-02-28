@@ -164,7 +164,7 @@ namespace StoreClient
         /// <param name="locale">sets the locale to do the search on. If null or empty, it uses what's set for Locale</param>
         /// <returns></returns>
         /// <exception cref="System.NullReferenceException">Artist Id cannot be null or empty</exception>
-        public async Task<List<Album>> GetAlbumsForArtistAsync(string artistId, string locale = null)
+        public async Task<AlbumCollection> GetAlbumsForArtistAsync(string artistId, string locale = null)
         {
             if (string.IsNullOrEmpty(artistId))
             {
@@ -179,7 +179,7 @@ namespace StoreClient
 
             var result = ParseXml<ZuneAlbumSearch.albumFeed>(xml);
 
-            var returnList = result.entry.Select(r => new Album(r)).ToList();
+            var returnList = new AlbumCollection(result.entry.Select(r => new Album(r)).ToList());
 
             return returnList;
         }
@@ -219,25 +219,26 @@ namespace StoreClient
         /// <param name="pageNumber">The page number.</param>
         /// <param name="locale">The locale.</param>
         /// <returns></returns>
-        public async Task<List<StoreApp>> GetAppsListAsync(SearchBy searchBy = SearchBy.Popular,
-                                                           CostType costType = CostType.Free,
-                                                           bool includeGames = false,
-                                                           string categoryId = null,
-                                                           //int maxNumberOfAppsToReturn = 20,
-                                                           int pageNumber = 1,
-                                                           string locale = null)
+        public async Task<StoreAppCollection> GetAppsListAsync(SearchBy searchBy = SearchBy.Popular,
+                                                               CostType costType = CostType.Free,
+                                                               bool includeGames = false,
+                                                               string categoryId = null,
+                                                               //int maxNumberOfAppsToReturn = 20,
+                                                               int pageNumber = 1,
+                                                               string locale = null)
         {
             locale = string.IsNullOrEmpty(locale) ? Locale : locale;
 
             if (costType == CostType.Free || costType == CostType.Paid)
             {
                 var url = CreateAppListUrl(searchBy, costType, includeGames, pageNumber, locale, categoryId);
-                
+
                 var xml = await HttpClient.GetStringAsync(url);
 
                 var storeResults = ParseXml<ZuneAppSearch.appListFeed>(xml);
 
-                var results = storeResults.entry.Select(x => new StoreApp(x)).ToList();
+                var results = new StoreAppCollection(storeResults.entry.Select(x => new StoreApp(x)).ToList());
+                results.ProcessLinks(storeResults.link);
 
                 return results;
             }
@@ -249,7 +250,7 @@ namespace StoreClient
 
                 var storeResults = ParseXml<ZuneAppSearch.appListFeed>(xml);
 
-                var results = storeResults.entry.Select(x => new StoreApp(x)).ToList();
+                var results = new StoreAppCollection(storeResults.entry.Select(x => new StoreApp(x)).ToList());
 
                 url = CreateAppListUrl(searchBy, CostType.Paid, includeGames, pageNumber, locale);
 
@@ -267,7 +268,7 @@ namespace StoreClient
         /// </summary>
         /// <param name="locale">The locale.</param>
         /// <returns></returns>
-        public async Task<List<Category>> GetAppCategoriesAsync(string locale = null)
+        public async Task<CategoryCollection> GetAppCategoriesAsync(string locale = null)
         {
             locale = string.IsNullOrEmpty(locale) ? Locale : locale;
 
@@ -277,7 +278,7 @@ namespace StoreClient
 
             var results = ParseXml<ZuneCategories.feed>(xml);
 
-            var returnList = results.entry.Select(x => new Category(x)).ToList();
+            var returnList = new CategoryCollection(results.entry.Select(x => new Category(x)).ToList());
 
             return returnList;
         }
@@ -287,7 +288,7 @@ namespace StoreClient
         /// </summary>
         /// <param name="locale">The locale.</param>
         /// <returns></returns>
-        public async Task<List<Category>> GetMusicGenresAsync(string locale = null)
+        public async Task<CategoryCollection> GetMusicGenresAsync(string locale = null)
         {
             locale = string.IsNullOrEmpty(locale) ? Locale : locale;
 
@@ -297,7 +298,7 @@ namespace StoreClient
 
             var result = ParseXml<ZuneCategories.feed>(xml);
 
-            var resultList = result.entry.Select(x => new Category(x)).ToList();
+            var resultList = new CategoryCollection(result.entry.Select(x => new Category(x)).ToList());
 
             return resultList;
         }
@@ -307,10 +308,11 @@ namespace StoreClient
         /// </summary>
         /// <param name="genreId">The genre id.</param>
         /// <param name="musicSearchBy">The music search by.</param>
+        /// <param name="marker">The next/previous marker to get more items</param>
         /// <param name="locale">The locale.</param>
         /// <returns></returns>
         /// <exception cref="System.NullReferenceException">Genre Id cannot be null or empty</exception>
-        public async Task<List<Album>> GetAlbumsByGenre(string genreId, MusicSearchBy musicSearchBy = MusicSearchBy.SalesRank, string locale = null)
+        public async Task<AlbumCollection> GetAlbumsByGenre(string genreId, MusicSearchBy musicSearchBy = MusicSearchBy.SalesRank, string marker = "afterMarker=CgAAAA%3d%3d", string locale = null)
         {
             if (string.IsNullOrEmpty(genreId))
             {
@@ -320,13 +322,14 @@ namespace StoreClient
             //http://catalog.zune.net/v3.2/{0}/music/genre/{1}/{2}?orderby={3}&chunksize=10
             locale = string.IsNullOrEmpty(locale) ? Locale : locale;
 
-            var url = string.Format(Constants.ItemsByGenreUrlFormat, locale, genreId, "albums", musicSearchBy.ToString());
+            var url = string.Format(Constants.ItemsByGenreUrlFormat, locale, genreId, "albums", musicSearchBy.ToString(), marker);
 
             var xml = await HttpClient.GetStringAsync(url);
 
             var result = ParseXml<ZuneAlbumSearch.feed>(xml);
 
-            var resultList = result.entry.Select(x => new Album(x)).ToList();
+            var resultList = new AlbumCollection(result.entry.Select(x => new Album(x)).ToList());
+            resultList.ProcessLinks(result.link);
 
             return resultList;
         }
@@ -336,10 +339,11 @@ namespace StoreClient
         /// </summary>
         /// <param name="genreId">The genre id.</param>
         /// <param name="musicSearchBy">The music search by.</param>
+        /// <param name="marker">The next/previous marker to get next/previous items</param>
         /// <param name="locale">The locale.</param>
         /// <returns></returns>
         /// <exception cref="System.NullReferenceException">Genre Id cannot be null or empty</exception>
-        public async Task<List<Artist>> GetArtistsByGenre(string genreId, MusicSearchBy musicSearchBy = MusicSearchBy.SalesRank, string locale = null)
+        public async Task<ArtistCollection> GetArtistsByGenre(string genreId, MusicSearchBy musicSearchBy = MusicSearchBy.SalesRank, string marker = "afterMarker=CgAAAA%3d%3d", string locale = null)
         {
             if (string.IsNullOrEmpty(genreId))
             {
@@ -348,13 +352,14 @@ namespace StoreClient
 
             locale = string.IsNullOrEmpty(locale) ? Locale : locale;
 
-            var url = string.Format(Constants.ItemsByGenreUrlFormat, locale, genreId, "artists", musicSearchBy.ToString());
+            var url = string.Format(Constants.ItemsByGenreUrlFormat, locale, genreId, "artists", musicSearchBy.ToString(), marker);
 
             var xml = await HttpClient.GetStringAsync(url);
 
             var result = ParseXml<ZuneArtistSearch.feed>(xml);
 
-            var resultList = result.entry.Select(x => new Artist(x)).ToList();
+            var resultList = new ArtistCollection(result.entry.Select(x => new Artist(x)).ToList());
+            resultList.ProcessLinks(result.link);
 
             return resultList;
         }

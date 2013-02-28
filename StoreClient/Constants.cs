@@ -15,7 +15,7 @@
             "http://marketplaceedgeservice.windowsphone.com/v8/catalog/apps?startIndex={0}&chunkSize=10&pagingToken=10%7c10&os=8.0.9903.0&cc=US&oc=&lang={1}&hw=469838850&dm=Virtual&excludeCategory={2}&oemId=Microsoft&moId=&orderBy={3}&cost={4}&cf=";
         internal const string CategoryListUrlFormat = "http://cdn.marketplaceedgeservice.windowsphone.com/v8/catalog/appCategories?os=8.0.9903.0&cc=US&oc=&lang={0}&hw=469838850&dm=Virtual&cf=";
         internal const string GenreListUrlFormat = "http://catalog.zune.net/v3.2/{0}/music/genre";
-        internal const string ItemsByGenreUrlFormat = "http://catalog.zune.net/v3.2/{0}/music/genre/{1}/{2}?orderby={3}&chunksize=10";
+        internal const string ItemsByGenreUrlFormat = "http://catalog.zune.net/v3.2/{0}/music/genre/{1}/{2}?orderby={3}&chunksize=10{4}";
 
     }
 }

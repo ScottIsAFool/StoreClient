@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Entities\AlbumCollection.cs" />
+    <Compile Include="Entities\BaseCollection.cs" />
     <Compile Include="Entities\CostType.cs" />
     <Compile Include="Entities\Album.cs" />
     <Compile Include="Entities\Artist.cs" />
