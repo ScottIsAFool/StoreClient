@@ -210,6 +210,156 @@ namespace StoreClient
         }
 
         /// <summary>
+        /// Gets the apps list async.
+        /// </summary>
+        /// <param name="searchBy">The search by.</param>
+        /// <param name="costType">Type of the cost.</param>
+        /// <param name="includeGames">if set to <c>true</c> [include games].</param>
+        /// <param name="categoryId">The category id.</param>
+        /// <param name="pageNumber">The page number.</param>
+        /// <param name="locale">The locale.</param>
+        /// <returns></returns>
+        public async Task<List<StoreApp>> GetAppsListAsync(SearchBy searchBy = SearchBy.Popular,
+                                                           CostType costType = CostType.Free,
+                                                           bool includeGames = false,
+                                                           string categoryId = null,
+                                                           //int maxNumberOfAppsToReturn = 20,
+                                                           int pageNumber = 1,
+                                                           string locale = null)
+        {
+            locale = string.IsNullOrEmpty(locale) ? Locale : locale;
+
+            if (costType == CostType.Free || costType == CostType.Paid)
+            {
+                var url = CreateAppListUrl(searchBy, costType, includeGames, pageNumber, locale, categoryId);
+                
+                var xml = await HttpClient.GetStringAsync(url);
+
+                var storeResults = ParseXml<ZuneAppSearch.appListFeed>(xml);
+
+                var results = storeResults.entry.Select(x => new StoreApp(x)).ToList();
+
+                return results;
+            }
+            else
+            {
+                var url = CreateAppListUrl(searchBy, CostType.Free, includeGames, pageNumber, locale);
+
+                var xml = await HttpClient.GetStringAsync(url);
+
+                var storeResults = ParseXml<ZuneAppSearch.appListFeed>(xml);
+
+                var results = storeResults.entry.Select(x => new StoreApp(x)).ToList();
+
+                url = CreateAppListUrl(searchBy, CostType.Paid, includeGames, pageNumber, locale);
+
+                xml = await HttpClient.GetStringAsync(url);
+
+                storeResults = ParseXml<ZuneAppSearch.appListFeed>(xml);
+                results.AddRange(storeResults.entry.Select(x => new StoreApp(x)));
+
+                return results;
+            }
+        }
+
+        /// <summary>
+        /// Gets the app categories async.
+        /// </summary>
+        /// <param name="locale">The locale.</param>
+        /// <returns></returns>
+        public async Task<List<Category>> GetAppCategoriesAsync(string locale = null)
+        {
+            locale = string.IsNullOrEmpty(locale) ? Locale : locale;
+
+            var url = string.Format(Constants.CategoryListUrlFormat, locale);
+
+            var xml = await HttpClient.GetStringAsync(url);
+
+            var results = ParseXml<ZuneCategories.feed>(xml);
+
+            var returnList = results.entry.Select(x => new Category(x)).ToList();
+
+            return returnList;
+        }
+
+        /// <summary>
+        /// Gets the music genres async.
+        /// </summary>
+        /// <param name="locale">The locale.</param>
+        /// <returns></returns>
+        public async Task<List<Category>> GetMusicGenresAsync(string locale = null)
+        {
+            locale = string.IsNullOrEmpty(locale) ? Locale : locale;
+
+            var url = string.Format(Constants.GenreListUrlFormat, locale);
+
+            var xml = await HttpClient.GetStringAsync(url);
+
+            var result = ParseXml<ZuneCategories.feed>(xml);
+
+            var resultList = result.entry.Select(x => new Category(x)).ToList();
+
+            return resultList;
+        }
+
+        /// <summary>
+        /// Gets the albums by genre.
+        /// </summary>
+        /// <param name="genreId">The genre id.</param>
+        /// <param name="musicSearchBy">The music search by.</param>
+        /// <param name="locale">The locale.</param>
+        /// <returns></returns>
+        /// <exception cref="System.NullReferenceException">Genre Id cannot be null or empty</exception>
+        public async Task<List<Album>> GetAlbumsByGenre(string genreId, MusicSearchBy musicSearchBy = MusicSearchBy.SalesRank, string locale = null)
+        {
+            if (string.IsNullOrEmpty(genreId))
+            {
+                throw new NullReferenceException("Genre Id cannot be null or empty");
+            }
+
+            //http://catalog.zune.net/v3.2/{0}/music/genre/{1}/{2}?orderby={3}&chunksize=10
+            locale = string.IsNullOrEmpty(locale) ? Locale : locale;
+
+            var url = string.Format(Constants.ItemsByGenreUrlFormat, locale, genreId, "albums", musicSearchBy.ToString());
+
+            var xml = await HttpClient.GetStringAsync(url);
+
+            var result = ParseXml<ZuneAlbumSearch.feed>(xml);
+
+            var resultList = result.entry.Select(x => new Album(x)).ToList();
+
+            return resultList;
+        }
+
+        /// <summary>
+        /// Gets the artists by genre.
+        /// </summary>
+        /// <param name="genreId">The genre id.</param>
+        /// <param name="musicSearchBy">The music search by.</param>
+        /// <param name="locale">The locale.</param>
+        /// <returns></returns>
+        /// <exception cref="System.NullReferenceException">Genre Id cannot be null or empty</exception>
+        public async Task<List<Artist>> GetArtistsByGenre(string genreId, MusicSearchBy musicSearchBy = MusicSearchBy.SalesRank, string locale = null)
+        {
+            if (string.IsNullOrEmpty(genreId))
+            {
+                throw new NullReferenceException("Genre Id cannot be null or empty");
+            }
+
+            locale = string.IsNullOrEmpty(locale) ? Locale : locale;
+
+            var url = string.Format(Constants.ItemsByGenreUrlFormat, locale, genreId, "artists", musicSearchBy.ToString());
+
+            var xml = await HttpClient.GetStringAsync(url);
+
+            var result = ParseXml<ZuneArtistSearch.feed>(xml);
+
+            var resultList = result.entry.Select(x => new Artist(x)).ToList();
+
+            return resultList;
+        }
+
+        /// <summary>
         /// Gets the app info async.
         /// </summary>
         /// <param name="appId">The app id.</param>
@@ -253,21 +403,7 @@ namespace StoreClient
         /// <returns></returns>
         public string CreateArtistBackgroundUrl(string artistId, ScreenSize screenSize)
         {
-            var height = "480";
-            switch (screenSize)
-            {
-                case ScreenSize.SevenTwentyP:
-                    height = "720";
-                    break;
-                case ScreenSize.Wvga:
-                    height = "480";
-                    break;
-                case ScreenSize.Wxga:
-                    height = "768";
-                    break;
-            }
-
-            return string.Format(Constants.ArtistBackgroundUrlFormat, Locale, artistId, height);
+            return string.Format(Constants.ArtistBackgroundUrlFormat, Locale, artistId, screenSize.ToEnumString());
         }
 
         /// <summary>
@@ -329,6 +465,27 @@ namespace StoreClient
             }
 
             return string.Format(Constants.ScreenshotUrlFormat, imageId, formatType);
+        }
+
+
+        private static string CreateAppListUrl(SearchBy searchBy,
+                                               CostType costType,
+                                               bool includeGames = false,
+            //int maxNumberOfAppsToReturn = 20,
+                                               int pageNumber = 1,
+                                               string locale = null,
+                                               string categoryId = null)
+        {
+            var url = string.Format(Constants.AppListUrlFormat,
+                                    pageNumber * 10,
+                                    locale,
+                                    includeGames ? "" : "windowsphone.games",
+                                    searchBy.ToString(),
+                                    costType.ToString());
+
+            if (!string.IsNullOrEmpty(categoryId)) url += string.Format("&category={0}", categoryId);
+
+            return url;
         }
 
         internal static T ParseXml<T>(string xml)

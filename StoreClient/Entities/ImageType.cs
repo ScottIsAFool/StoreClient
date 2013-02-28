@@ -1,4 +1,4 @@
-﻿namespace StoreClient
+﻿namespace StoreClient.Entities
 {
     public enum ImageType
     {

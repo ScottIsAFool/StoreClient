@@ -9,6 +9,13 @@ namespace StoreClient.Entities
             Id = item.id;
             Title = item.title;
         }
+
+        internal Category(ZuneCategories.feedEntry item)
+        {
+            Id = item.id;
+            Title = item.title.Value;
+        }
+
         public string Id { get; set; }
         public string Title { get; set; }
     }

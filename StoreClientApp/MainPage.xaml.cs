@@ -2,6 +2,7 @@
 using System.Windows;
 using Microsoft.Phone.Controls;
 using StoreClient;
+using StoreClient.Entities;
 
 namespace ZuneClientApp
 {

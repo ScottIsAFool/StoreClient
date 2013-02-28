@@ -21,6 +21,7 @@ using this tokenized nuspec file.
     <title />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
+	<tags>wpdev, win8dev, wp8dev, windows phone, windows store, windows 8, silverlight 4, silverlight 5, silverlight</tags>
   </metadata>
   <files />
 </package>
