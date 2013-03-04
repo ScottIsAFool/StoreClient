@@ -71,6 +71,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Entities\ImageType.cs" />
     <Compile Include="Entities\SearchBy.cs" />
+    <Compile Include="IStoreApiClient.cs" />
     <Compile Include="StoreApiClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -10,7 +10,7 @@ using StoreClient.Entities.Zune;
 
 namespace StoreClient
 {
-    public class StoreApiClient
+    public class StoreApiClient : IStoreApiClient
     {
         private const string DefaultLocale = "en-US";
         /// <summary>

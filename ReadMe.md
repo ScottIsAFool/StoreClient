@@ -44,6 +44,9 @@ Sort of, it doesn't really do much yet though, will build it up a wee bit though
 I hope so. See what the future holds.
 
 ## Changelog ##
+***0.2.1.0***
+- Added the `IStoreApiClient` interface to allow developers to more easily create design time data when using something like MVVM Light.
+
 ***0.2.0.0***
 Added the following methods:
 - `GetAppsListAsync` lets you get a list of apps with different criteria (like, new apps, apps by category etc)
