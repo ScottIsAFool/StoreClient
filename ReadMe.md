@@ -47,6 +47,10 @@ Sort of, it doesn't really do much yet though, will build it up a wee bit though
 I hope so. See what the future holds.
 
 ## Changelog ##
+***0.2.2.0***
+- Fixes for return types that have no entries in them
+- Added WindowsPhone70 to the ClientType enum
+
 ***0.2.1.0***
 - Added the `IStoreApiClient` interface to allow developers to more easily create design time data when using something like MVVM Light.
 
