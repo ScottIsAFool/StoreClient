@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -76,10 +77,15 @@ namespace StoreClient
             {
                 url = string.Format(Constants.SearchUrlMusicFormatSecondary, locale, "album", searchQuery);
                 var alXml = await HttpClient.GetStringAsync(url);
+                
                 var alResults = ParseXml<ZuneAlbumSearch.feed>(alXml);
-                foreach (var result in alResults.entry)
+                
+                if (alResults.entry != null)
                 {
-                    searchResult.Albums.Add(new Album(result));
+                    foreach (var result in alResults.entry)
+                    {
+                        searchResult.Albums.Add(new Album(result));
+                    }
                 }
             }
 
@@ -87,10 +93,15 @@ namespace StoreClient
             {
                 url = string.Format(Constants.SearchUrlMusicFormatSecondary, locale, "artist", searchQuery);
                 var arXml = await HttpClient.GetStringAsync(url);
+                
                 var arResults = ParseXml<ZuneArtistSearch.feed>(arXml);
-                foreach (var result in arResults.entry)
+                
+                if (arResults.entry != null)
                 {
-                    searchResult.Artists.Add(new Artist(result));
+                    foreach (var result in arResults.entry)
+                    {
+                        searchResult.Artists.Add(new Artist(result));
+                    }
                 }
             }
 
@@ -98,21 +109,31 @@ namespace StoreClient
             {
                 url = string.Format(Constants.SearchUrlMusicFormatSecondary, locale, "track", searchQuery);
                 var trXml = await HttpClient.GetStringAsync(url);
+                
                 var trResults = ParseXml<ZuneTrack.feed>(trXml);
-                foreach (var result in trResults.entry)
+                
+                if (trResults.entry != null)
                 {
-                    searchResult.Tracks.Add(new Track(result));
+                    foreach (var result in trResults.entry)
+                    {
+                        searchResult.Tracks.Add(new Track(result));
+                    }
                 }
             }
 
             if (includeApps)
             {
-                url = string.Format(Constants.SearchUrlAppFormat, locale, searchQuery);
+                url = string.Format(Constants.SearchUrlAppFormat, locale, Uri.EscapeUriString(searchQuery));
                 var apXml = await HttpClient.GetStringAsync(url);
+                
                 var apResults = ParseXml<ZuneAppSearch.feed>(apXml);
-                foreach (var result in apResults.entry)
+                
+                if (apResults.entry != null)
                 {
-                    searchResult.StoreApps.Add(new StoreApp(result));
+                    foreach (var result in apResults.entry)
+                    {
+                        searchResult.StoreApps.Add(new StoreApp(result));
+                    }
                 }
             }
 
@@ -277,6 +298,8 @@ namespace StoreClient
 
             var results = ParseXml<ZuneCategories.feed>(xml);
 
+            if (results.entry == null) return new CategoryCollection(new List<Category>());
+
             var returnList = new CategoryCollection(results.entry.Select(x => new Category(x)).ToList());
 
             return returnList;
@@ -296,6 +319,8 @@ namespace StoreClient
             var xml = await HttpClient.GetStringAsync(url);
 
             var result = ParseXml<ZuneCategories.feed>(xml);
+
+            if (result.entry == null) return new CategoryCollection(new List<Category>());
 
             var resultList = new CategoryCollection(result.entry.Select(x => new Category(x)).ToList());
 
@@ -327,6 +352,8 @@ namespace StoreClient
 
             var result = ParseXml<ZuneAlbumSearch.feed>(xml);
 
+            if (result.entry == null) return new AlbumCollection(new List<Album>());
+
             var resultList = new AlbumCollection(result.entry.Select(x => new Album(x)).ToList());
             resultList.ProcessLinks(result.link);
 
@@ -357,6 +384,8 @@ namespace StoreClient
 
             var result = ParseXml<ZuneArtistSearch.feed>(xml);
 
+            if (result.entry == null) return new ArtistCollection(new List<Artist>());
+
             var resultList = new ArtistCollection(result.entry.Select(x => new Artist(x)).ToList());
             resultList.ProcessLinks(result.link);
 
@@ -386,6 +415,8 @@ namespace StoreClient
             var xml = await HttpClient.GetStringAsync(url);
 
             var result = ParseXml<ZuneTrackSearch.feed>(xml);
+
+            if (result.entry == null) return new TrackCollection(new List<Track>());
 
             var resultList = new TrackCollection(result.entry.Select(x => new Track(x)).ToList());
             resultList.ProcessLinks(result.link);
