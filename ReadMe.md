@@ -47,6 +47,9 @@ Sort of, it doesn't really do much yet though, will build it up a wee bit though
 I hope so. See what the future holds.
 
 ## Changelog ##
+***0.2.3.0***
+- Added the WindowsPhone81 ClientType enum
+
 ***0.2.2.0***
 - Fixes for return types that have no entries in them
 - Added WindowsPhone70 to the ClientType enum
