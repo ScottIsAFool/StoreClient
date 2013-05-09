@@ -4,6 +4,7 @@
     {
         WindowsPhone70,
         WindowsPhone71,
-        WindowsPhone80
+        WindowsPhone80,
+        WindowsPhone81
     }
 }
