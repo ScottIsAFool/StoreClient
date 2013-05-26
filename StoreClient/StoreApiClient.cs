@@ -30,6 +30,14 @@ namespace StoreClient
         public string Locale { get; set; }
 
         /// <summary>
+        /// Gets or sets which Windows Phone store to search against (either WP7 or WP8). Defaults to WP8.
+        /// </summary>
+        /// <value>
+        /// The windows phone store.
+        /// </value>
+        public Store WindowsPhoneStore { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="StoreApiClient" /> class.
         /// </summary>
         /// <param name="handler">The handler.</param>
@@ -123,7 +131,10 @@ namespace StoreClient
 
             if (includeApps)
             {
-                url = string.Format(Constants.SearchUrlAppFormat, locale, Uri.EscapeUriString(searchQuery));
+                var storeFormat = WindowsPhoneStore == Store.WindowsPhone8 ? Constants.SearchUrlAppFormat : Constants.SearchUrlAppFormat7;
+
+                url = string.Format(storeFormat, locale, Uri.EscapeUriString(searchQuery));
+
                 var apXml = await HttpClient.GetStringAsync(url);
                 
                 var apResults = ParseXml<ZuneAppSearch.feed>(apXml);
@@ -440,7 +451,9 @@ namespace StoreClient
 
             locale = string.IsNullOrEmpty(locale) ? Locale : locale;
 
-            var url = string.Format(Constants.AppUrlFormat, appId, locale);
+            var storeFormat = WindowsPhoneStore == Store.WindowsPhone8 ? Constants.AppUrlFormat : Constants.AppUrlFormat7;
+
+            var url = string.Format(storeFormat, appId, locale);
 
             var xml = await HttpClient.GetStringAsync(url);
 
@@ -533,7 +546,7 @@ namespace StoreClient
         }
 
 
-        private static string CreateAppListUrl(SearchBy searchBy,
+        private string CreateAppListUrl(SearchBy searchBy,
                                                CostType costType,
                                                bool includeGames = false,
             //int maxNumberOfAppsToReturn = 20,
@@ -541,7 +554,9 @@ namespace StoreClient
                                                string locale = null,
                                                string categoryId = null)
         {
-            var url = string.Format(Constants.AppListUrlFormat,
+            var storeFormat = WindowsPhoneStore == Store.WindowsPhone8 ? Constants.AppListUrlFormat : Constants.AppListUrlFormat7;
+
+            var url = string.Format(storeFormat,
                                     pageNumber * 10,
                                     locale,
                                     includeGames ? "" : "windowsphone.games",
