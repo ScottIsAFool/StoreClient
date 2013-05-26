@@ -59,7 +59,7 @@ namespace StoreClient.Entities
             UserRating = item.averageUserRating;
             UserRatingCount = item.userRatingCount;
             ImageId = item.image.id.Replace("urn:uuid:", "");
-            BackgroundImageId = item.backgroundImage.id.Replace("urn:uuid:", "");
+            BackgroundImageId = string.IsNullOrEmpty(item.backgroundImage.id) ? string.Empty : item.backgroundImage.id.Replace("urn:uuid:", "");
             Category = new Category(item.categories.category);
             Tags = item.tags.tag;
             PublisherName = item.publisher;
