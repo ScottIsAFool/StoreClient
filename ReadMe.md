@@ -4,7 +4,7 @@
 StoreClient is a Portable Class Library that will allow you to acces the data used in the Windows Phone Store app. Allowing you to search for music (albums, artists) and apps. The client also gives you methods for getting the image URLs needed to display the same images that the Store app uses.
 
 ## Licence ##
-My own licence for this is use it as much as you want, do what you want. However, at present, it uses the HttpClient package for portable class libraries, which doesn't yet have a Go Live licence, so really, no one can use it in a production app. Please bear this in mind until Microsoft say it's ok.
+My own licence for this is use it as much as you want, do what you want, just create awesome stuff with it, got that!
 
 ## What frameworks are targetted? ##
 ![Target ALL THE FRAMEWORKS](http://cdn.memegenerator.net/instances/400x/35496697.jpg)
