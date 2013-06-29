@@ -1,8 +1,10 @@
 ﻿using System;
+using PropertyChanged;
 using StoreClient.Entities.Zune;
 
 namespace StoreClient.Entities
 {
+    [ImplementPropertyChanged]
     public class Track
     {
         internal Track(ZuneTrack.feedEntry item)

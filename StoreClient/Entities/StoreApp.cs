@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using PropertyChanged;
 using StoreClient.Entities.Zune;
 
 namespace StoreClient.Entities
 {
+    [ImplementPropertyChanged]
     public class StoreApp
     {
         public StoreApp(){}

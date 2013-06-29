@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using PropertyChanged;
 using StoreClient.Entities.Zune;
 
 namespace StoreClient.Entities
 {
+    [ImplementPropertyChanged]
     public class Album 
     {
         internal Album(ZuneAlbum.feed item)

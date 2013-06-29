@@ -1,7 +1,9 @@
-﻿using StoreClient.Entities.Zune;
+﻿using PropertyChanged;
+using StoreClient.Entities.Zune;
 
 namespace StoreClient.Entities
 {
+    [ImplementPropertyChanged]
     public class Capability
     {
         internal Capability(ZuneApp.capabilitiesCapability capabilities)

@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using PropertyChanged;
 
 namespace StoreClient.Entities
 {
+    [ImplementPropertyChanged]
     public class SearchResult
     {
         public SearchResult()
