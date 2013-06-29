@@ -47,6 +47,8 @@ Sort of, it doesn't really do much yet though, will build it up a wee bit though
 I hope so. See what the future holds.
 
 ## Changelog ##
+***0.3.0.0*** - Updated to use the latest beta of HttpClient that supports automatic compression.
+
 ***0.2.4.0***
 - Added support for searching the Windows Phone 7 app store and get app listings specific for that version of the OS. This is set using the `WindowsPhoneStore` property.
 
