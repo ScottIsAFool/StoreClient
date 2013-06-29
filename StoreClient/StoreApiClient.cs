@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using AdvancedREI.Net.Http.Compression;
 using StoreClient.Entities;
 using StoreClient.Entities.Zune;
 
@@ -43,7 +43,9 @@ namespace StoreClient
         /// <param name="handler">The handler.</param>
         public StoreApiClient(HttpMessageHandler handler)
         {
-            HttpClient = new HttpClient(handler);
+            HttpClient = handler == null 
+            ? new HttpClient(new HttpClientHandler{AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip}) 
+            : new HttpClient(handler);
             Locale = DefaultLocale;
         }
 
@@ -51,9 +53,8 @@ namespace StoreClient
         /// Initializes a new instance of the <see cref="StoreApiClient" /> class with default HttpHandler using compression
         /// </summary>
         public StoreApiClient()
+            : this(null)
         {
-            HttpClient = new HttpClient(new CompressedHttpClientHandler());
-            Locale = DefaultLocale;
         }
 
         /// <summary>
