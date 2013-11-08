@@ -8,6 +8,7 @@
         internal const string ArtistUrlFormat = "http://catalog.zune.net/v3.2/{0}/music/artist/{1}/{2}";
         internal const string AlbumUrlFormat = "http://catalog.zune.net/v3.2/{0}/music/album/{1}";
         internal const string AppUrlFormat = "http://marketplaceedgeservice.windowsphone.com/v8/catalog/apps/{0}?os=8.0.9903.0&cc=US&oc=&lang={1}&hw=469838850&dm=Virtual&oemId=Microsoft&moId=&cf=";
+        internal const string ReviewUrlFormat = "http://marketplaceedgeservice.windowsphone.com/v8/ratings/product/{0}/reviews?os={1}&cc={2}&lang=en-GB";
 
         internal const string AppUrlFormat7 = "http://marketplaceedgeservice.windowsphone.com/v3.2/{1}/apps/{0}?clientType=WinMobile%207.1&store=Zest&store=O2OGB&store=Samsung&os=7.10.8862.144&hw=268458498&dm=OMNIA7";
         internal const string AlbumArtUrlFormat = "http://image.catalog.zune.net/v3.2/{0}/image/{1}?width=320&height=320&resize=true&contenttype=image/jpeg";

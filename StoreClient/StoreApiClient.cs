@@ -11,6 +11,8 @@ using StoreClient.Entities.Zune;
 
 namespace StoreClient
 {
+    using System.Globalization;
+
     public class StoreApiClient : IStoreApiClient
     {
         private const string DefaultLocale = "en-US";
@@ -461,6 +463,50 @@ namespace StoreClient
             var result = ParseXml<ZuneApp.feed>(xml);
 
             return new StoreApp(result);
+        }
+
+        /// <summary>
+        /// Gets the app reviews async.
+        /// </summary>
+        /// <param name="appId">The app id.</param>
+        /// <param name="locale">The locale. (defaults to all)</param>
+        /// <param name="os">The store to check.</param>
+        /// <returns></returns>
+        /// <exception cref="System.NullReferenceException">Album Id cannot be null or empty</exception>
+        public async Task<ReviewCollection> GetAppReviewsAsync(string appId, string locale = "all", Store os = Store.WindowsPhone8)
+        {
+            if (string.IsNullOrEmpty(appId))
+            {
+                throw new NullReferenceException("Album Id cannot be null or empty");
+            }
+
+            var storeVersion = "8.0.10328.0";
+
+            if (os == Store.WindowsPhone7)
+            {
+                storeVersion = "7.0";
+            }
+
+            var loc = string.IsNullOrEmpty(locale) ? Locale : locale;
+            var storeCulture = loc;
+            if (!loc.Equals("all"))
+            {
+                var culture = new RegionInfo(loc);
+                storeCulture = culture.TwoLetterISORegionName;
+            }
+
+            var url = string.Format(Constants.ReviewUrlFormat, appId, storeCulture, storeVersion);
+
+            var xml = await HttpClient.GetStringAsync(url);
+
+            var result = ParseXml<ZuneReviewResults>(xml);
+
+            if (result.entry == null) return new ReviewCollection(new List<Review>());
+
+            var resultList = new ReviewCollection(result.entry.Select(x => new Review(x)).ToList());
+            resultList.ProcessLinks(result.link);
+
+            return resultList;
         }
 
         /// <summary>

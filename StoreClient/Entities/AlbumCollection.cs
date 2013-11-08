@@ -41,4 +41,12 @@ namespace StoreClient.Entities
             AddRange(list);
         }
     }
+
+    public class ReviewCollection : BaseCollection<Review>
+    {
+        public ReviewCollection(IEnumerable<Review> list)
+        {
+            this.AddRange(list);
+        }
+    }
 }
