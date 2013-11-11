@@ -59,7 +59,7 @@
     <Compile Include="Entities\SearchResult.cs" />
     <Compile Include="Entities\StoreApp.cs" />
     <Compile Include="Entities\Track.cs" />
-    <Compile Include="Entities\Zune\Review.cs" />
+    <Compile Include="Entities\Review.cs" />
     <Compile Include="Entities\Zune\ZuneAlbum.cs" />
     <Compile Include="Entities\Zune\ZuneAlbumSearch.cs" />
     <Compile Include="Entities\Zune\ZuneApp.cs" />
