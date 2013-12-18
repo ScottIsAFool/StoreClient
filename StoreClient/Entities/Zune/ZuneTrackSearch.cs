@@ -15,7 +15,7 @@ namespace StoreClient.Entities.Zune
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://a9.com/-/spec/opensearch/1.1/")]
-            public byte startIndex { get; set; }
+            public int startIndex { get; set; }
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://a9.com/-/spec/opensearch/1.1/")]
@@ -23,7 +23,7 @@ namespace StoreClient.Entities.Zune
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://a9.com/-/spec/opensearch/1.1/")]
-            public byte itemsPerPage { get; set; }
+            public int itemsPerPage { get; set; }
 
             /// <remarks/>
             public DateTime updated { get; set; }
@@ -77,7 +77,7 @@ namespace StoreClient.Entities.Zune
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/music/2007/10")]
-            public byte playRank { get; set; }
+            public int playRank { get; set; }
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/music/2007/10")]
@@ -89,11 +89,11 @@ namespace StoreClient.Entities.Zune
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/music/2007/10")]
-            public byte trackNumber { get; set; }
+            public int trackNumber { get; set; }
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/music/2007/10")]
-            public byte discNumber { get; set; }
+            public int discNumber { get; set; }
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/music/2007/10")]

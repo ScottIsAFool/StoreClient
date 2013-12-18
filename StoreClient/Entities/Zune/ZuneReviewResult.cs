@@ -43,7 +43,7 @@ namespace StoreClient.Entities.Zune
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/apps/2008/02")]
-        public byte userRating { get; set; }
+        public int userRating { get; set; }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/apps/2008/02")]

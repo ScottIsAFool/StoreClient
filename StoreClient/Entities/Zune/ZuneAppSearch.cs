@@ -14,15 +14,15 @@ namespace StoreClient.Entities.Zune
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://a9.com/-/spec/opensearch/1.1/")]
-            public byte startIndex { get; set; }
+            public int startIndex { get; set; }
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://a9.com/-/spec/opensearch/1.1/")]
-            public byte totalResults { get; set; }
+            public int totalResults { get; set; }
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://a9.com/-/spec/opensearch/1.1/")]
-            public byte itemsPerPage { get; set; }
+            public int itemsPerPage { get; set; }
 
             /// <remarks/>
             public DateTime updated { get; set; }
@@ -114,7 +114,7 @@ namespace StoreClient.Entities.Zune
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/apps/2008/02")]
-            public byte userRatingCount { get; set; }
+            public int userRatingCount { get; set; }
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/apps/2008/02")]
@@ -146,7 +146,7 @@ namespace StoreClient.Entities.Zune
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/apps/2008/02")]
-            public byte k { get; set; }
+            public int k { get; set; }
         }
 
         /// <remarks/>

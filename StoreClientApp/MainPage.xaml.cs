@@ -29,9 +29,10 @@ namespace ZuneClientApp
             // Get Mehdoh's images
             var client = new StoreApiClient();
 
-            var mehdohApp = await client.GetAppInfoAsync("150f3fc4-dc0d-4299-a8ba-069b70436ad7");
+            //var mehdohApp = await client.GetAppInfoAsync("150f3fc4-dc0d-4299-a8ba-069b70436ad7");
 
-            var mehdohLogoUrl = client.CreateAppImageUrl(mehdohApp.ImageId, ImageType.IconLarge);
+            //var mehdohLogoUrl = client.CreateAppImageUrl(mehdohApp.ImageId, ImageType.IconLarge);
+            var results = await client.SearchAsync("instance", includeAlbums: false, includeArtists: false, includePodcasts: false, includeTracks: false);
 
             var s = new StringBuilder();
             

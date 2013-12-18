@@ -26,7 +26,7 @@ namespace StoreClient.Entities.Zune
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/apps/2008/02")]
-            public sbyte iapCount { get; set; }
+            public int iapCount { get; set; }
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/apps/2008/02")]
@@ -50,7 +50,7 @@ namespace StoreClient.Entities.Zune
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/apps/2008/02")]
-            public byte userRatingCount { get; set; }
+            public int userRatingCount { get; set; }
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://schemas.zune.net/catalog/apps/2008/02")]
@@ -125,7 +125,7 @@ namespace StoreClient.Entities.Zune
             public string id { get; set; }
 
             /// <remarks/>
-            public byte orientation { get; set; }
+            public int orientation { get; set; }
         }
 
         /// <remarks/>
